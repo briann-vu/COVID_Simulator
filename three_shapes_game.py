@@ -236,8 +236,9 @@ class Game:
             o.draw(self._win)
 
         self._win.update_frame(self._frame_rate)
-      
-   def draw_background(object):
+
+
+def draw_background(object):
     # floor
     object._win.rectangle(0, 0, 600, 600, "#969595")
     # TV and stand
