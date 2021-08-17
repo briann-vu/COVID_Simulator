@@ -1,6 +1,7 @@
 """File: three_shapes_game.py
 
    Author: Russ Lewis
+           (Updated by Brian Vu by adding a draw_background(object) function 2021)
 
    Purpose: Defines the Game class, which provides the core mechanisms for the
             Three Shapes family of programs.
@@ -236,6 +237,15 @@ class Game:
             o.draw(self._win)
 
         self._win.update_frame(self._frame_rate)
+
+
+"""
+Draws the background for the covidSim.py program using multiple
+shapes. Background is supposed to look like a house for a party 
+with a living room, dining table, and bar area.
+
+Takes in an object (usually a game object) to draw on its window/gui object
+"""
 
 
 def draw_background(object):
