@@ -230,41 +230,44 @@ class Game:
 
         self._win.clear()
 
-        # floor
-        self._win.rectangle(0, 0, 600, 600, "#969595")
-        # TV and stand
-        self._win.rectangle(210, 20, 185, 18, "#713F1C")
-        self._win.rectangle(225, 10, 150, 15, "black")
-        # Sofa 1
-        self._win.rectangle(80, 80, 70, 90, "#424241")
-        self._win.rectangle(110, 98, 40, 54, "#4D4D4D")
-        # Sofa 2
-        self._win.rectangle(450, 80, 70, 90, "#424241")
-        self._win.rectangle(450, 98, 40, 54, "#4D4D4D")
-        # Sofa 3
-        self._win.rectangle(210, 180, 185, 70, "#424241")
-        self._win.rectangle(240, 180, 118, 50, "#4D4D4D")
-        # Coffee table
-        self._win.ellipse(300, 98, 140, 40, "#713F1C")
-        self._win.text(300, 130, "Living Room")
-        # Dining table
-        self._win.ellipse(150, 450, 100, 180, "#713F1C")
-        self._win.rectangle(50, 420, 30, 60, "#713F1C")
-        self._win.rectangle(60, 420, 20, 40, "#969595")
-        self._win.rectangle(220, 420, 30, 60, "#713F1C")
-        self._win.rectangle(220, 420, 20, 40, "#969595")
-        self._win.rectangle(135, 280, 30, 60, "#713F1C")
-        self._win.rectangle(135, 280, 20, 40, "#969595")
-        self._win.text(150, 570, "Dining Room")
-        # Bar
-        self._win.rectangle(590, 420, 10, 75, "#583116")
-        self._win.rectangle(530, 405, 30, 105, "#583116")
-        self._win.ellipse(515, 415, 22, 22, "#3A3A3A")
-        self._win.ellipse(515, 450, 22, 22, "#3A3A3A")
-        self._win.ellipse(515, 485, 22, 22, "#3A3A3A")
-        self._win.text(465, 485, "Bar")
+        draw_background(self)
 
         for o in self._active_objs:
             o.draw(self._win)
 
         self._win.update_frame(self._frame_rate)
+      
+   def draw_background(object):
+    # floor
+    object._win.rectangle(0, 0, 600, 600, "#969595")
+    # TV and stand
+    object._win.rectangle(210, 20, 185, 18, "#713F1C")
+    object._win.rectangle(225, 10, 150, 15, "black")
+    # Sofa 1
+    object._win.rectangle(80, 80, 70, 90, "#424241")
+    object._win.rectangle(110, 98, 40, 54, "#4D4D4D")
+    # Sofa 2
+    object._win.rectangle(450, 80, 70, 90, "#424241")
+    object._win.rectangle(450, 98, 40, 54, "#4D4D4D")
+    # Sofa 3
+    object._win.rectangle(210, 180, 185, 70, "#424241")
+    object._win.rectangle(240, 180, 118, 50, "#4D4D4D")
+    # Coffee table
+    object._win.ellipse(300, 98, 140, 40, "#713F1C")
+    object._win.text(300, 130, "Living Room")
+    # Dining table
+    object._win.ellipse(150, 450, 100, 180, "#713F1C")
+    object._win.rectangle(50, 420, 30, 60, "#713F1C")
+    object._win.rectangle(60, 420, 20, 40, "#969595")
+    object._win.rectangle(220, 420, 30, 60, "#713F1C")
+    object._win.rectangle(220, 420, 20, 40, "#969595")
+    object._win.rectangle(135, 280, 30, 60, "#713F1C")
+    object._win.rectangle(135, 280, 20, 40, "#969595")
+    object._win.text(150, 570, "Dining Room")
+    # Bar
+    object._win.rectangle(590, 420, 10, 75, "#583116")
+    object._win.rectangle(530, 405, 30, 105, "#583116")
+    object._win.ellipse(515, 415, 22, 22, "#3A3A3A")
+    object._win.ellipse(515, 450, 22, 22, "#3A3A3A")
+    object._win.ellipse(515, 485, 22, 22, "#3A3A3A")
+    object._win.text(465, 485, "Bar")
