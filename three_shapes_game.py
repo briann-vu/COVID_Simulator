@@ -1,7 +1,8 @@
 """File: three_shapes_game.py
 
    Author: Russ Lewis
-           (Updated by Brian Vu by adding a draw_background(object) function 2021)
+           (Updated by Brian Vu by adding draw_background(object), draw_person(object) 
+           and display_stats(object) functions)
 
    Purpose: Defines the Game class, which provides the core mechanisms for the
             Three Shapes family of programs.
@@ -25,7 +26,7 @@ class Game:
 
         self._frame_rate = frame_rate
 
-        self._win = graphics(wid, hei, title)
+        self._win = graphics(wid, hei + 300, title)
 
         # this is a configuration setting - it changes how we calculate
         # the distance between objects in do_nearby_calls()
@@ -218,7 +219,7 @@ class Game:
             if y+rad >= self._hei:
                 o.edge("bottom", self._hei)
 
-    def draw(self):
+    def draw(self, population, cur_healthy, cur_healthy_masks, cur_healthy_no_masks, og_infected_pop, cur_infected, newly_infected, infected_mask_type):
         """Calls draw() on every object in the game.  Also does the rest of the
            misc calls necessary to animate the window.
         """
@@ -233,22 +234,85 @@ class Game:
 
         draw_background(self)
 
+        # make another function?
+        display_stats(self, population, cur_healthy, cur_healthy_masks, cur_healthy_no_masks,
+                      og_infected_pop, cur_infected, newly_infected, infected_mask_type)
+
         for o in self._active_objs:
             o.draw(self._win)
 
         self._win.update_frame(self._frame_rate)
 
 
-"""
-Draws the background for the covidSim.py program using multiple
-shapes. Background is supposed to look like a house for a party 
-with a living room, dining table, and bar area.
+def display_stats(object, population, cur_healthy, cur_healthy_masks, cur_healthy_no_masks,
+                  og_infected_pop, infected_mask_type, cur_infected, newly_infected):
+    """
+    Draws the stats portion to display stats like; Total Number of People, Current 
+    Number of Healthy people, Original Number of Healthy Mask Wearers, Original 
+    Number of Healthy Non Mask Wearers, Number of Contagious People, mask status of 
+    those infected, Current Number of Infected People and Number of Newly Infected People
 
-Takes in an object (usually a game object) to draw on its window/gui object
-"""
+    Takes in an object (usually a game object) to draw on its window/gui object
+    """
+    object._win.rectangle(0, 600, 600, 900, "#e6e047")
+    object._win.line(0, 600, 600, 600)
+    object._win.text(50, 615, "Statistics/Information:", "black", 25)
+    object._win.text(50, 650, "Total Number of People: " + str(population))
+    object._win.text(50, 670, "Current Number of Healthy people: " +
+                     str(cur_healthy), "#181563")
+    object._win.text(
+        50, 690, "Original Number of Healthy Mask Wearers: " + str(cur_healthy_masks), "#181563")
+    draw_person(object, 413, 698, True, "white")
+    object._win.text(50, 710, "Original Number of Healthy Non Mask Wearers: " +
+                     str(cur_healthy_no_masks), "#181563")
+    draw_person(object, 450, 718, False, "white")
+    object._win.text(50, 730, "Number of Contagious People : " +
+                     str(og_infected_pop), "#66020a")
+    draw_person(object, 322, 738, True, "#FC3547")
+    draw_person(object, 347, 738, False, "#FC3547")
+    object._win.text(
+        50, 750, "Are the Contagious People Wearing Masks?: " + str(infected_mask_type), "#66020a")
+    object._win.text(50, 770, "Current Number of Infected People : " +
+                     str(cur_infected), "#66020a")
+    object._win.text(
+        50, 790, "Number of Newly Infected People : " + str(newly_infected), "#66020a")
+    draw_person(object, 350, 798, True, "#FD878E")
+    draw_person(object, 375, 798, False, "#FD878E")
+
+
+def draw_person(object, x, y, mask, color):
+    """
+    Draws a "person" to represent the healthy and infected objects on the stats section
+
+    Takes in an object (usually a game object) to draw on its window/gui object
+    """
+    if mask == True:
+        object._win.ellipse(x, y, 20,
+                            20, "white")
+        object._win.rectangle(x - 8, y, 16, 8, "#417CF9")
+        object._win.ellipse(x - 5, y - 5, 3,
+                            3, "black")
+        object._win.ellipse(x + 5, y - 5, 3,
+                            3, "black")
+    else:
+        object._win.ellipse(x, y, 20,
+                            20, color)
+        object._win.ellipse(x - 5, y - 5, 3,
+                            3, "black")
+        object._win.ellipse(x + 5, y - 5, 3,
+                            3, "black")
+        object._win.ellipse(x, y + 4, 8,
+                            2, "black")
 
 
 def draw_background(object):
+    """
+    Draws the background for the covidSim.py program using multiple
+    shapes. Background is supposed to look like a house for a party 
+    with a living room, dining table, and bar area.
+
+    Takes in an object (usually a game object) to draw on its window/gui object
+    """
     # floor
     object._win.rectangle(0, 0, 600, 600, "#969595")
     # TV and stand
